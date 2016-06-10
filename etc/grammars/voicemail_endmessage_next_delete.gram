@@ -1,0 +1,15 @@
+#ABNF 1.0;
+mode voice;
+language en-US;
+tag-format <semantics/1.0.2006>;
+
+root $voicemail_endmessage_next_delete;
+
+$voicemail_endmessage_next_delete = 
+    (
+      $<voicemail.gram#nextmessage> {out=rules.latest()} |
+      $<voicemail.gram#deletemessage> {out=rules.latest()} | 
+      $<voicemail.gram#repeatmessage> {out=rules.latest()} |
+      $<voicemail.gram#movemessage> {out=rules.latest()} 
+
+    ) {out=rules.latest()};

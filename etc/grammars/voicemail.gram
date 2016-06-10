@@ -1,0 +1,26 @@
+#ABNF 1.0;
+mode voice;
+language en-US;
+tag-format <semantics/1.0.2006>;
+
+root $voicemail;
+
+public $newmessages = new messages {out="newmessages"};
+public $oldmessages = old messages {out="oldmessages"};
+public $changefolders = change (folder|folders) {out="changefolders"};
+public $help = help {out="help"};
+public $nextmessage = next message {out="nextmessage"};
+public $previousmessage = previous message {out="previousmessage"};
+public $deletemessage = delete message {out="deletemessage"};
+public $repeatmessage = repeat message {out="repeatmessage"};
+public $savemessage = save message {out="savemessage"};
+public $rewind = re wind {out="rewind"};
+public $fastforward = fast forward {out="fastforward"};
+public $movemessage = move message {out="movemessage"};
+public $folderINBOX = Inbox|in box|new messages {out="INBOX"};
+public $folderOld = (old|saved) [messages] {out="Old"};
+public $folderWork = work {out="Work"};
+public $folderFriends = friends {out="Friends"};
+public $folderFamily = family {out="Family"};
+
+$voicemail = ($newmessages|$oldmessages|$changefolders|$help|$nextmessage|$previousmessage|$deletemessage|$savemessage|$repeatmessage|$rewind|$fastforward) {out=rules.latest()};

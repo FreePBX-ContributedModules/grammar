@@ -1,0 +1,19 @@
+#ABNF 1.0;
+mode voice;
+language en-US;
+tag-format <semantics/1.0.2006>;
+
+root $presence;
+
+$presence = (
+	  (I am at lunch | Im at lunch) {out="presenceset_1"}
+	| lunch {out="presenceset_1"}
+	| (I am in a meeting | Im in a meeting) {out="presenceset_2"}
+	| in a meeting {out="presenceset_2"}
+	| (Available | Back | I am Back) {out="presenceset_3"}
+	| Im Back {out="presenceset_3"}
+	| (Away | I am away) {out="presenceset_4"}
+	| Im away {out="presenceset_4"}
+	| (I am out of town | Im out of town) {out="presenceset_5"}
+	| Out of town {out="presenceset_5"}
+);

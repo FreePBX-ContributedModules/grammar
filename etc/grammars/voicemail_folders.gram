@@ -1,0 +1,15 @@
+#ABNF 1.0;
+mode voice;
+language en-US;
+tag-format <semantics/1.0.2006>;
+
+root $voicemail_folders;
+
+$voicemail_folders = 
+    (
+      $<voicemail.gram#folderINBOX> {out=rules.latest()} |
+      $<voicemail.gram#folderOld> {out=rules.latest()} |
+      $<voicemail.gram#folderWork> {out=rules.latest()} |
+      $<voicemail.gram#folderFriends> {out=rules.latest()} |
+      $<voicemail.gram#folderFamily> {out=rules.latest()}
+    ) {out=rules.latest()};

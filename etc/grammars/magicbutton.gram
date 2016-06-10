@@ -1,0 +1,122 @@
+#ABNF 1.0;
+mode voice;
+language en-US;
+tag-format <semantics/1.0.2006>;
+
+root $magicbutton;
+
+/**************************************************************
+********************* CALL FUNCTIONALITY **********************
+***************************************************************/
+
+$emergency = call nine one one {out="call_911"};
+
+$extensions = 
+ ((call) (([the] $<ringgroups.gram> group) | (group $<ringgroups.gram>))) {out="groups_"+rules.latest()} 
+| ((call) $<user.gram>) {out="call_"+rules.latest()} 
+| (intercom $<user.gram>) {out="intercom_"+rules.latest()} 
+| (transfer to $<user.gram>) {out="transfer_"+rules.latest()}
+| (transfer to
+    (
+      ($<user.gram> [zz] voicemail) |
+      (voicemail $<user.gram>) |
+      (voicemail $<phone_numbers.gram#Ext>)
+      ($<phone_numbers.gram#Ext> [zz] voicemail)
+
+    )
+  ) {out="transfer2voicemail_"+rules.latest()};
+
+	
+$phone_numbers_and_by_extension = 
+((call) $<phone_numbers.gram>) {out="call_"+rules.latest()}
+| (intercom $<phone_numbers.gram>) {out="intercom_"+rules.latest()}
+| (transfer to $<phone_numbers.gram>) {out="transfer_"+rules.latest()}
+| (transfer to
+    (
+      (voicemail $<phone_numbers.gram#Ext>)
+      ($<phone_numbers.gram#Ext> [zz] voicemail)
+
+    )
+  ) {out="transfer2voicemail_"+rules.latest()};
+
+
+$paging = page [the] $<paging.gram> [group] {out="paging_"+rules.latest()};
+
+$conference = Conference (In|Call) ( 
+                 $<phone_numbers.gram#Ext> {out="conference_"+rules.latest()} |
+                 $<user.gram> {out="conference_"+rules.latest()} |
+                 $<phone_numbers.gram> {out="conference_"+rules.latest()}
+               );
+//All the call functionality consolidated
+
+$call = ($emergency|$extensions|$phone_numbers_and_by_extension|$paging|$conference) {out=rules.latest()};
+
+/**************************************************************
+******************** PRESENCE FUNCTIONALITY *******************
+***************************************************************/
+
+$enable_dnd = (Enable|activate|$NULL) Do Not Disturb[me] {out="dnd_enable"};
+$disable_dnd = (Disable|Cancel|Remove|de activate) Do Not Disturb {out="dnd_disable"};
+
+$enable_cfwd = Forward [my] calls to $<phone_numbers.gram> {out="cfwd_"+rules.latest()};
+$enable_cfwd_cell = Forward [my] calls to [my] (cell|cell phone) {out="cfwd_cell"};
+$enable_cfwd_home = Forward [my] calls to [my] (home|house) {out="cfwd_home"};
+$disable_cfwd = (De Activate|Disable|Cancel|Remove) Call (Forward|Forwarding) {out="cfwd_disable"};
+
+//Presence
+$set_presence = ( $<presence.gram> {out=rules.latest()} );
+$where_is = where is $<user.gram> {out="presenceget_"+rules.latest()};
+
+$presence = ($enable_dnd | $disable_dnd | $enable_cfwd | $enable_cfwd_cell | $enable_cfwd_home| $disable_cfwd | 
+$set_presence | $where_is) {out=rules.latest()};
+
+/**************************************************************
+********************* CALL PARK & RETRIEVE ********************
+***************************************************************/
+
+$park = (
+          (Park (call|caller)) {out="park_park"} |
+          (Retrieve call $<numbers.gram>) {out="retrievecalls_"+rules.latest()} |
+          (List [parked] calls|List parked) {out="retrievecalls_list"}
+        );
+
+/**************************************************************
+********************** INFORMATION ACCESS* ********************
+***************************************************************/
+
+$what_time = What ((time is it) | (is the time)) {out="informational_time"};
+$what_date = What (((day|date) is it)|(is the (date|day))) [today] {out="informational_date"};
+$what_weather = (Check weather | ((What is|whats) the weather [like])) {out="informational_weather"};
+$import_exchange = Import [my] [exchange] [outlook] Contacts {out="importexchange"};
+
+$list_groups = What ( 
+                 [ring|call] groups (are there|can I call) {out="informational_ringgroups"} |
+                 groups can I page {out="informational_paging"} |
+                 (page|paging) groups (can I call|are there) {out="informational_paging"} |
+                 (message|voicemail) [blast] groups (are there|can I call) {out="informational_vmblast"}
+               );
+$introduction = [Play] Introduction {out="informational_introduction"};
+$help = (elp|help|what can I say) {out="informational_help"};
+
+$informational = ($what_time | $what_date | $what_weather | $list_groups | $help | $introduction | $import_exchange) {out=rules.latest()};
+
+/**************************************************************
+*************************** VOICEMAIL *************************
+***************************************************************/
+
+$leave_message = ((Send|Leave) a (voicemail [message]|message) (for|to) 
+                    (
+                      $<user.gram> {out="sendmessage_"+rules.latest()} |
+                      $<phone_numbers.gram#Ext> {out="sendmessage_"+rules.latest()} |
+                      [the] $<vmblast.gram> group{out="vmblast_"+rules.latest()} |
+                      group $<vmblast.gram>{out="vmblast_"+rules.latest()}
+                    ) 
+                  );
+$voicemail_record = Record [my] (name {out="vmailrecord_name"} | greeting {out="vmailrecord_greeting"}); 
+$temporary_record = Record [my|a] temporary [away] (message|greeting) {out="vmailrecord_temporarygreeting"};
+$remove_temp = Remove [my] temporary [away] (greeting| message) {out="voicemail_removetemporarymessage"};
+$check_voicemail = Check [my] (voicemail|messages) {out="voicemail_4001_check"};
+
+$voicemail = ($leave_message|$remove_temp|$voicemail_record|$temporary_record|$check_voicemail) {out=rules.latest()};
+
+$magicbutton = ($call|$informational|$park|$voicemail|$presence) {out=rules.latest()};

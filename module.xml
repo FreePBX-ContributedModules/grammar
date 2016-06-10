@@ -1,0 +1,35 @@
+<module>
+	<rawname>grammar</rawname>
+	<name>Speech Recognition</name>
+	<license>AGPLv3</license>
+	<licenselink>http://www.gnu.org/licenses/agpl-3.0.txt</licenselink>
+  <repo>contributed</repo>
+	<publisher>Sangoma Technologies</publisher>
+	<version>2.11.0.4</version>
+	<category>Settings</category>
+	<changelog>
+		*2.11.0.4* Remove en_US Translations
+		*2.11.0.3* Sales cleanup
+		*2.11.0.2* Fix confliucting sound files with symlinks
+		*2.11.0.0* Bump for 2.11
+		*2.10.0.21* Fix license issues
+		*2.10.0.19* 1513
+		*2.10.0.18* Fix issue with weather
+		*2.10.0.17* re #1504 -
+		*2.10.0.16* Packaging of ver 2.10.0.16
+		*2.10.0.15* Packaging of ver 2.10.0.15
+	</changelog>
+	<depends>
+    <version>2.10</version>
+	</depends>
+	<commercial>
+	<description>Speech recognition configuration for extensions, IVR, VmX Locater, Ring Groups, VM Blast Groups, and Page Groups </description>
+	<menuitems>
+		<grammar>Speech Configuration</grammar>
+	</menuitems>
+	<supported>
+		<version>2.10</version>
+	</supported>
+	<location>release/2.11/grammar-2.11.0.2.tgz</location>
+	<md5sum>f11e1e954b87188c024cfecc1cf1ca7e</md5sum>
+</module>

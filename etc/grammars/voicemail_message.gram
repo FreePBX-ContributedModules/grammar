@@ -1,0 +1,13 @@
+#ABNF 1.0;
+mode voice;
+language en-US;
+tag-format <semantics/1.0.2006>;
+
+root $voicemail_message;
+
+$voicemail_message = 
+    (
+      $<voicemail.gram#deletemessage> {out=rules.latest()} |
+      $<voicemail.gram#rewind> {out=rules.latest()} |
+      $<voicemail.gram#fastforward> {out=rules.latest()}
+    ) {out=rules.latest()};

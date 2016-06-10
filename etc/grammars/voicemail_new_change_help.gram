@@ -1,0 +1,13 @@
+#ABNF 1.0;
+mode voice;
+language en-US;
+tag-format <semantics/1.0.2006>;
+
+root $voicemail_new_change_help;
+
+$voicemail_new_change_help = 
+    (
+      $<voicemail.gram#newmessages> {out=rules.latest()} |
+      $<voicemail.gram#changefolders> {out=rules.latest()} |
+      $<voicemail.gram#help> {out=rules.latest()}
+    ) {out=rules.latest()};

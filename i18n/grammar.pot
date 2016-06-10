@@ -1,0 +1,89 @@
+# This file is part of FreePBX.
+#
+# For licensing information, please see the file named LICENSE located in the module directory
+#
+# FreePBX language template for grammar
+# Copyright (C) 2008-2015 Sangoma, Inc.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-12 13:54-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid ""
+"COMMERCIAL MODULE REQUIRES A LICENSE FOR IT TO FUNCTION.  Please visit www."
+"schmoozecom.com/oss.php Speech recognition configuration for extensions, "
+"IVR, VmX Locater, Ring Groups, VM Blast Groups, and Page Groups"
+msgstr ""
+
+msgid ""
+"Check this box to enable synchronization with Aastra phone applications.  "
+"This will sync buttons like DND and Away when users give commands to the "
+"magic button"
+msgstr ""
+
+msgid "Check this box to enable the Magic Button"
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "Debug Information"
+msgstr ""
+
+msgid "Enable Aastra Sync"
+msgstr ""
+
+msgid "Enable Magic Button"
+msgstr ""
+
+msgid "Grammar"
+msgstr ""
+
+msgid "List the words/phrases to be added to speech recognition, one per line"
+msgstr ""
+
+msgid ""
+"List the words/phrases to be added to the speech recognition engine, one per "
+"line"
+msgstr ""
+
+msgid "Magic Button"
+msgstr ""
+
+msgid "Magic Button Options"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Speech"
+msgstr ""
+
+msgid "Speech Configuration"
+msgstr ""
+
+msgid "Speech Recognition"
+msgstr ""
+
+msgid "Speech Recognition Configuration"
+msgstr ""
+
+msgid "Submit Changes"
+msgstr ""
+
+msgid "WARNING: "
+msgstr ""
+
+msgid "Zip Code:"
+msgstr ""
+
+msgid "Zip code is used for \"What is the weather like?\" command."
+msgstr ""

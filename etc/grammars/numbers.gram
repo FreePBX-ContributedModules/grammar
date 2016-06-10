@@ -1,0 +1,68 @@
+#ABNF 1.0;
+mode voice;
+language en-US;
+tag-format <semantics/1.0.2006>;
+
+root $numbers;
+
+$base =         one {out=1}	|
+		two {out=2}	|
+		three {out=3}	|
+		four {out=4}	|
+		five {out=5}	|
+		six {out=6}	|
+		seven {out=7}	|
+		eight {out=8}	|
+		nine {out=9}  ;
+
+$zero = (oh | zero) {out=0};
+
+public $Digits = ( /0.1/ $zero| /0.9/ $base) {out=rules.latest()};
+
+$teen =         ten {out=10}	|
+		eleven {out=11}	|
+		twelve {out=12}	|
+		thirteen {out=13}	|
+		fourteen {out=14}	|
+		fifteen {out=15}	|
+		sixteen {out=16}	|
+		seventeen {out=17}|
+		eighteen {out=18}	|
+		nineteen {out=19};
+		
+$twenty = twenty {out=20} (/0.9/ $base {out+=rules.latest()} | /0.1/ $NULL);
+$thirty = thirty {out=30} (/0.9/ $base {out+=rules.latest()} | /0.1/ $NULL);
+$forty = forty {out=40} (/0.9/ $base {out+=rules.latest()} | /0.1/ $NULL);
+$fifty = fifty {out=50} (/0.9/ $base {out+=rules.latest()} | /0.1/ $NULL);
+$sixty = sixty {out=60} (/0.9/ $base {out+=rules.latest()} | /0.1/ $NULL);
+$seventy = seventy {out=70} (/0.9/ $base {out+=rules.latest()} | /0.1/ $NULL);
+$eighty = eighty {out=80} (/0.9/ $base {out+=rules.latest()} | /0.1/ $NULL);
+$ninety = ninety {out=90} (/0.9/ $base {out+=rules.latest()} | /0.1/ $NULL);
+
+$tens = ($teen | $twenty | $thirty | $forty | $fifty | $sixty | $seventy | $eighty | $ninety)	{out=rules.latest()};
+
+$ten3 = $base {out=rules.latest()*100} $tens {out+=rules.latest()};
+$ten4 = $tens {out=rules.latest()*100} $tens {out+=rules.latest()};
+
+$hundred3 = $base hundred {out=rules.latest()*100};
+$hundred4 = ($base|$tens) hundred {out=rules.latest()*100};
+
+//$thousand = $base thousand {out=rules.latest()*1000};
+$hundreds = $hundred3 {out=rules.latest()} (/0.9/ ($tens | $base) {out+=rules.latest()}|$NULL);
+
+$thousand  = (/0.01/ thousand {out=1000} |/0.8/ $base thousand {out=rules.latest()*1000}| /0.15/ $tens thousand {out=rules.latest()*1000}| /0.04/ $hundreds thousand {out=rules.latest()*1000});
+$thousands = /0.95/ $thousand {out=rules.latest()} (/0.9/ ( /0.9/ $hundreds | /0.1/ ($tens| $base) ) {out+=rules.latest()} | $NULL )   |
+             /0.05/ $tens hundred {out=rules.latest()*100};
+
+$nums   = {out=""} (/0.80/ $Digits {out+=rules.latest().toString()})<1-> | 
+		    /0.10/ $ten4 {out=rules.latest().toString()} | 
+		    /0.01/ $hundred4 
+		    {
+		  	if (rules.latest()<1000)
+		  		out='0'+rules.latest().toString();
+		  	else
+		  		out=rules.latest().toString();
+		  	} | 
+		    /0.09/ $thousands {out=rules.latest().toString()};
+
+$numbers = ( $nums) {out+=rules.latest()};

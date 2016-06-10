@@ -1,0 +1,26 @@
+#ABNF 1.0;
+mode voice;
+language en-US;
+tag-format <semantics/1.0.2006>;
+
+root $weather;
+
+$base =         one {out=1}     |
+                two {out=2}     |
+                three {out=3}   |
+                four {out=4}    |
+                five {out=5}    |
+                six {out=6}     |
+                seven {out=7}   |
+                eight {out=8}   |
+                nine {out=9}  ;
+
+$zero = (oh | zero) {out=0};
+
+$Digits = ( /0.1/ $zero| /0.9/ $base) {out=rules.latest()};
+
+$zip = {out=""} ($Digits {out+=rules.latest()})<5>;
+$change = change location {out="changelocation"};
+$repeat = repeat {out="repeat"};
+
+$weather = ($zip | $change | $repeat) {out=rules.latest()};
