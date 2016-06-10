@@ -3,13 +3,13 @@
 # For licensing information, please see the file named LICENSE located in the module directory
 #
 # FreePBX language template for grammar
-# Copyright (C) 2008-2015 Sangoma, Inc.
+# Copyright (C) 2008-2016 Sangoma, Inc.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-12 13:54-0500\n"
+"POT-Creation-Date: 2016-06-10 10:51-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,73 +17,96 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid ""
-"COMMERCIAL MODULE REQUIRES A LICENSE FOR IT TO FUNCTION.  Please visit www."
-"schmoozecom.com/oss.php Speech recognition configuration for extensions, "
-"IVR, VmX Locater, Ring Groups, VM Blast Groups, and Page Groups"
-msgstr ""
-
+#: page.grammar.php:221
 msgid ""
 "Check this box to enable synchronization with Aastra phone applications.  "
 "This will sync buttons like DND and Away when users give commands to the "
 "magic button"
 msgstr ""
 
+#: page.grammar.php:210
 msgid "Check this box to enable the Magic Button"
 msgstr ""
 
+#: page.grammar.php:109
 msgid "Debug"
 msgstr ""
 
+#: page.grammar.php:121
 msgid "Debug Information"
 msgstr ""
 
+#: page.grammar.php:221
 msgid "Enable Aastra Sync"
 msgstr ""
 
+#: page.grammar.php:210
 msgid "Enable Magic Button"
 msgstr ""
 
+#: functions.inc.php:316
 msgid "Grammar"
 msgstr ""
 
+#: functions.inc.php:352
 msgid "List the words/phrases to be added to speech recognition, one per line"
 msgstr ""
 
+#: functions.inc.php:316
 msgid ""
 "List the words/phrases to be added to the speech recognition engine, one per "
 "line"
 msgstr ""
 
+#: functions.inc.php:315
 msgid "Magic Button"
 msgstr ""
 
+#: page.grammar.php:208
 msgid "Magic Button Options"
 msgstr ""
 
+#: grammar.i18n.php:6
+#: grammar.i18n.php:12
+#: page.grammar.php:107
 msgid "Settings"
 msgstr ""
 
+#: functions.inc.php:352
 msgid "Speech"
 msgstr ""
 
+#: grammar.i18n.php:10
 msgid "Speech Configuration"
 msgstr ""
 
+#: functions.inc.php:348
+#: grammar.i18n.php:4
 msgid "Speech Recognition"
 msgstr ""
 
+#: page.grammar.php:113
 msgid "Speech Recognition Configuration"
 msgstr ""
 
+#: grammar.i18n.php:8
+msgid ""
+"Speech recognition configuration for extensions, IVR, VmX Locater, Ring "
+"Groups, VM Blast Groups, and Page Groups"
+msgstr ""
+
+#: page.grammar.php:226
 msgid "Submit Changes"
 msgstr ""
 
+#: page.grammar.php:98
 msgid "WARNING: "
 msgstr ""
 
+#: page.grammar.php:214
 msgid "Zip Code:"
 msgstr ""
 
+#: page.grammar.php:214
 msgid "Zip code is used for \"What is the weather like?\" command."
 msgstr ""
