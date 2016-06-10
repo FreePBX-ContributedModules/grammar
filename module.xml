@@ -22,7 +22,6 @@
 	<depends>
     <version>2.10</version>
 	</depends>
-	<commercial>
 	<description>Speech recognition configuration for extensions, IVR, VmX Locater, Ring Groups, VM Blast Groups, and Page Groups </description>
 	<menuitems>
 		<grammar>Speech Configuration</grammar>
